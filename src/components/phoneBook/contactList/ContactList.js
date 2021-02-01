@@ -1,9 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import contactsActions from '../../../redux/contacts/contactsActions'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const ContactList = ({ contacts, deleteContact }) => {
+
+    const onHandleDelete = (e) => {
+        const id = e.target.dataset.id;
+        deleteContact(id);
+    }
+
     return (
         <div>
             <h2>Contacts</h2>
@@ -16,7 +24,7 @@ const ContactList = ({ contacts, deleteContact }) => {
                             classNames={s}>
                             <li className={s.listItem}>
                                 <span className={s.name}>{contact.name}</span>: <span>{contact.number}</span>
-                                <button className={s.button} type="button" data-id={contact.id} onClick={deleteContact}>Delete</button>
+                                <button className={s.button} type="button" data-id={contact.id} onClick={onHandleDelete}>Delete</button>
                             </li>
                         </CSSTransition>)
                 })}
@@ -33,7 +41,20 @@ ContactList.propTypes = {
             id: PropTypes.string,
         }),
     ),
-    onDeleteContact: PropTypes.func,
+    deleteContact: PropTypes.func,
 };
 
-export default ContactList;
+const mapStateToProps = state => ({
+    contacts: state.contacts.contactList,
+})
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteContact: (id) => {
+            dispatch(contactsActions.deleteContact(id));
+        },
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

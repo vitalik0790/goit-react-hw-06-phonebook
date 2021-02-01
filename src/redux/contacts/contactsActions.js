@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
+import actionTypes from "./contactsActionTypes";
 
 const addContact = ({ name, number }) => ({
-    type: "contact/add",
+    type: actionTypes.ADD,
     payload: {
         contact: {
             id: uuidv4(),
@@ -11,13 +12,31 @@ const addContact = ({ name, number }) => ({
     }
 })
 
-const deleteContact = (contactId) => ({
-    type: "contact/remove",
+const deleteContact = (id) => ({
+    type: actionTypes.REMOVE,
     payload: {
-        contactId,
+        id,
     }
 })
 
-const onHandleFilter = () => {
+// const onHandleFilter = (value) => ({
+//     type: actionTypes.VALUE,
+//     payload: {
+//         value,
+//     }
+// })
 
+
+const getFiltredContacts = (filter) => ({
+    type: actionTypes.FILTER,
+    payload: {
+        filter,
+    }
+})
+
+export default {
+    addContact,
+    deleteContact,
+    // onHandleFilter,
+    getFiltredContacts,
 }
