@@ -4,14 +4,7 @@ import contactsActions from '../../../redux/contacts/contactsActions'
 import PropTypes from 'prop-types';
 import s from './ContactFilter.module.css';
 
-const ContactFilter = ({ filter, getFiltredContacts }) => {
-
-    const onHandleFilter = (e) => {
-        console.log(e.target.value)
-        const filter = e.target.value;
-        getFiltredContacts(filter);
-    }
-
+const ContactFilter = ({ filter, onHandleFilter }) => {
     return (
         <div>
             <h3>Find contacts by name</h3>
@@ -22,21 +15,7 @@ const ContactFilter = ({ filter, getFiltredContacts }) => {
 
 ContactFilter.propTypes = {
     filter: PropTypes.string,
-    getFiltredContacts: PropTypes.func,
+    onHandleFilter: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-    // contacts: state.contacts.contactList,
-    filter: state.contacts.filter,
-})
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getFiltredContacts: (filter) => {
-            dispatch(contactsActions.getFiltredContacts(filter));
-        },
-    }
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactFilter);
+export default ContactFilter;

@@ -17,10 +17,10 @@ const contactList = (state = [], { type, payload }) => {
     }
 };
 
-const filter = (state = [], { type, payload }) => {
+const filter = (state = "", { type, payload }) => {
     switch (type) {
         case actionTypes.FILTER:
-            return state.filter(contact => contact.name.toLowerCase().includes(payload.filter.toLowerCase()))
+            return
 
         default:
             return state;

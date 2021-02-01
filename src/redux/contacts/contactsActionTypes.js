@@ -4,11 +4,11 @@ const REMOVE = "contacts/remove";
 
 const FILTER = "contacts/getFiltred";
 
-// const VALUE = "Contacts/handleFilter";
+const VALUE = "Contacts/handleFilter";
 
 export default {
     ADD,
     REMOVE,
     FILTER,
-    // VALUE,
+    VALUE,
 }
