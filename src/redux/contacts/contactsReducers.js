@@ -9,9 +9,6 @@ const contactList = (state = [], { type, payload }) => {
         case actionTypes.REMOVE:
             return state.filter(contact => contact.id !== payload.id)
 
-        case actionTypes.FILTER:
-            return state.filter(contact => contact.name.toLowerCase().includes(payload.filter.toLowerCase()))
-
         default:
             return state;
     }
@@ -19,8 +16,8 @@ const contactList = (state = [], { type, payload }) => {
 
 const filter = (state = "", { type, payload }) => {
     switch (type) {
-        case actionTypes.FILTER:
-            return
+        case actionTypes.VALUE:
+            return payload.filter;
 
         default:
             return state;

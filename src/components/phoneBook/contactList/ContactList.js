@@ -12,6 +12,8 @@ const ContactList = ({ contacts, deleteContact }) => {
         deleteContact(id);
     }
 
+
+
     return (
         <div>
             <h2>Contacts</h2>
@@ -44,15 +46,29 @@ ContactList.propTypes = {
     deleteContact: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-    contacts: state.contacts.contactList,
-})
+const mapStateToProps = state => {
+
+    const { contactList, filter } = state.contacts;
+    const normalizeFilter = filter.toLowerCase();
+
+    const filtredContacts = contactList.filter(contact =>
+        contact.name.toLowerCase().includes(normalizeFilter));
+
+    return {
+        contacts: filtredContacts
+    }
+};
+
 
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteContact: (id) => {
             dispatch(contactsActions.deleteContact(id));
         },
+
+        // getFiltredContacts: ({ contacts, filter }) => {
+        //     dispatch(contactsActions.getFiltredContacts())
+        // }
     }
 
 }

@@ -4,18 +4,31 @@ import contactsActions from '../../../redux/contacts/contactsActions'
 import PropTypes from 'prop-types';
 import s from './ContactFilter.module.css';
 
-const ContactFilter = ({ filter, onHandleFilter }) => {
+const ContactFilter = ({ value, onHandleFilter }) => {
+
     return (
         <div>
             <h3>Find contacts by name</h3>
-            <input className={s.input} tyype="text" value={filter} onChange={onHandleFilter}></input>
+            <input className={s.input}
+                type="text"
+                value={value}
+                onChange={(e) => onHandleFilter(e.target.value)}
+            />
         </div>
     );
 }
 
 ContactFilter.propTypes = {
-    filter: PropTypes.string,
+    value: PropTypes.string,
     onHandleFilter: PropTypes.func,
 };
 
-export default ContactFilter;
+const mapStateToProps = state => ({
+    value: state.contacts.filter,
+})
+
+const mapDispatchToProps = {
+    onHandleFilter: contactsActions.onHandleFilter,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactFilter);

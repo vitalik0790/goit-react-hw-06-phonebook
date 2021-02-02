@@ -19,25 +19,16 @@ const deleteContact = (id) => ({
     }
 })
 
-const onHandleFilter = (value) => ({
+const onHandleFilter = (filter) => ({
     type: actionTypes.VALUE,
     payload: {
-        value,
-    }
-})
-
-
-const getFiltredContacts = ({ contacts, filter }) => ({
-    type: actionTypes.FILTER,
-    payload: {
         filter,
-        contacts,
     }
 })
+
 
 export default {
     addContact,
     deleteContact,
     onHandleFilter,
-    getFiltredContacts,
 }
