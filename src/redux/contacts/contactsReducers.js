@@ -12,7 +12,7 @@ const removeContact = (state, action) => {
 const contactList = createReducer([], {
     [contactsActions.addContact]: addContact,
     [contactsActions.deleteContact]: removeContact,
-    [contactsActions.localStorage]: (_, action) => action.payload,
+    [contactsActions.addToLocalStorage]: (_, action) => action.payload,
 })
 
 const filter = createReducer("", {
