@@ -1,12 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import contactsActions from "../../../redux/contacts/contactsActions";
+import Notification from '../notification/Notification';
+import Empty from '../empty/Empty';
+import { CSSTransition } from "react-transition-group";
 import s from './ContactForm.module.css';
-import { connect } from "react-redux"
-import contactsActions from "../../../redux/contacts/contactsActions"
 
 class ContactForm extends Component {
     state = {
         name: '',
         number: '',
+        newContact: null,
+        showAlert: false,
+        showEmpty: false,
     }
 
     handleChange = (e) => {
@@ -16,13 +22,30 @@ class ContactForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.addContact({ name: this.state.name, number: this.state.number })
+        if (this.props.contacts.some(contact => contact.name === this.state.name)) {
+            this.setState({ newContact: this.state.name, showAlert: true })
+            setTimeout(() => {
+                this.setState({ showAlert: false })
+            }, 2500);
+
+        } else if (this.state.name === "" || this.state.contact === "") {
+            this.setState({ showEmpty: true })
+            setTimeout(() => {
+                this.setState({ showEmpty: false })
+            }, 2500);
+
+        } else {
+
+            this.props.addContact({ name: this.state.name, number: this.state.number })
+        }
         this.setState({ name: '', number: "" })
 
     }
 
 
     render() {
+
+        const { newContact, showAlert, showEmpty } = this.state;
         return (
             <div>
                 <form onSubmit={this.handleSubmit} className={s.form}>
@@ -36,6 +59,12 @@ class ContactForm extends Component {
                     </label>
                     <button className={s.button} type="submit">Add contact</button>
                 </form>
+                <CSSTransition in={showAlert} timeout={250} classNames={s} unmountOnExit>
+                    <Notification name={newContact} />
+                </CSSTransition>
+                <CSSTransition in={showEmpty} timeout={250} classNames={s} unmountOnExit>
+                    <Empty />
+                </CSSTransition>
             </div >
         );
     }
@@ -45,4 +74,10 @@ const mapDispatchToProps = {
     addContact: contactsActions.addContact
 }
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+const mapStateToProps = (state) => {
+    return {
+        contacts: state.contacts.contactList,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

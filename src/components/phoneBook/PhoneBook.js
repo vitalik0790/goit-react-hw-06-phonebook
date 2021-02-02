@@ -5,17 +5,17 @@ import ContactList from './contactList/ContactList';
 import ContactFilter from './contactFilter/ContactFilter';
 import { CSSTransition } from "react-transition-group";
 import s from './PhoneBook.module.css';
-import Notification from './notification/Notification';
-import Empty from './empty/Empty';
+// import Notification from './notification/Notification';
+// import Empty from './empty/Empty';
 
 
 class PhoneBook extends Component {
     state = {
         // contacts: [],
         // filter: "",
-        newContact: null,
-        showAlert: false,
-        showEmpty: false,
+        // newContact: null,
+        // showAlert: false,
+        // showEmpty: false,
     }
 
     // componentDidMount() {
