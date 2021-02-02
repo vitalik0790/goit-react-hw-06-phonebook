@@ -15,13 +15,13 @@ const deleteContact = createAction("contacts/remove");
 
 const onHandleFilter = createAction("contacts/handleFilter");
 
-const contactsFromLS = createAction("contacts/contactsFromLS");
+const localStorage = createAction("contacts/localStorage");
 
 export default {
     addContact,
     deleteContact,
     onHandleFilter,
-    contactsFromLS,
+    localStorage,
 }
 
 // const addContact = ({ name, number }) => ({

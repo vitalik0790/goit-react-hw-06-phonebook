@@ -19,7 +19,7 @@ class ContactForm extends Component {
         const contacts = localStorage.getItem("contacts");
 
         if (contacts) {
-            this.props.contactsFromLS(JSON.parse(contacts));
+            this.props.localStorage(JSON.parse(contacts));
         }
     }
 
@@ -88,7 +88,7 @@ class ContactForm extends Component {
 
 const mapDispatchToProps = {
     addContact: contactsActions.addContact,
-    contactsFromLS: contactsActions.contactsFromLS,
+    localStorage: contactsActions.localStorage,
 }
 
 const mapStateToProps = (state) => {
