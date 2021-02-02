@@ -10,13 +10,13 @@ import s from './PhoneBook.module.css';
 
 
 class PhoneBook extends Component {
-    state = {
-        // contacts: [],
-        // filter: "",
-        // newContact: null,
-        // showAlert: false,
-        // showEmpty: false,
-    }
+    // state = {
+    //     contacts: [],
+    //     filter: "",
+    //     newContact: null,
+    //     showAlert: false,
+    //     showEmpty: false,
+    // }
 
     // componentDidMount() {
     //     const persistedContacts = localStorage.getItem("contacts")

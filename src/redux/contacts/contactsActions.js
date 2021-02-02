@@ -1,8 +1,7 @@
+import { createAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import actionTypes from "./contactsActionTypes";
 
-const addContact = ({ name, number }) => ({
-    type: actionTypes.ADD,
+const addContact = createAction("contacts/add", ({ name, number }) => ({
     payload: {
         contact: {
             id: uuidv4(),
@@ -10,25 +9,41 @@ const addContact = ({ name, number }) => ({
             number,
         }
     }
-})
+}));
 
-const deleteContact = (id) => ({
-    type: actionTypes.REMOVE,
-    payload: {
-        id,
-    }
-})
+const deleteContact = createAction("contacts/remove");
 
-const onHandleFilter = (filter) => ({
-    type: actionTypes.VALUE,
-    payload: {
-        filter,
-    }
-})
-
+const onHandleFilter = createAction("contacts/handleFilter");
 
 export default {
     addContact,
     deleteContact,
     onHandleFilter,
 }
+
+// const addContact = ({ name, number }) => ({
+//     type: actionTypes.ADD,
+//     payload: {
+//         contact: {
+//             id: uuidv4(),
+//             name,
+//             number,
+//         }
+//     }
+// })
+
+
+// const deleteContact = (id) => ({
+//     type: actionTypes.REMOVE,
+//     payload: {
+//         id,
+//     }
+// })
+
+// const onHandleFilter = (filter) => ({
+//     type: actionTypes.VALUE,
+//     payload: {
+//         filter,
+//     }
+// })
+

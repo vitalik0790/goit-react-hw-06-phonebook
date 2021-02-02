@@ -1,30 +1,52 @@
 import { combineReducers } from "redux";
-import actionTypes from './contactsActionTypes'
+import { createReducer } from '@reduxjs/toolkit';
+import contactsActions from './contactsActions';
 
-const contactList = (state = [], { type, payload }) => {
-    switch (type) {
-        case actionTypes.ADD:
-            return [...state, payload.contact];
-
-        case actionTypes.REMOVE:
-            return state.filter(contact => contact.id !== payload.id)
-
-        default:
-            return state;
-    }
+const addContact = (state, action) => {
+    return [...state, action.payload.contact];
+};
+const removeContact = (state, action) => {
+    return state.filter(contact => contact.id !== action.payload);
 };
 
-const filter = (state = "", { type, payload }) => {
-    switch (type) {
-        case actionTypes.VALUE:
-            return payload.filter;
+const contactList = createReducer([], {
+    [contactsActions.addContact]: addContact,
+    [contactsActions.deleteContact]: removeContact,
+})
 
-        default:
-            return state;
-    }
-};
+const filter = createReducer("", {
+    [contactsActions.onHandleFilter]: (_, action) => action.payload,
+})
+
+
 
 export default combineReducers({
     contactList,
     filter,
 })
+
+
+
+// const contactList = (state = [], { type, payload }) => {
+    //     switch (type) {
+        //         case contactsActions.addContact.type:
+        //             return [...state, payload.contact];
+
+        //         case contactsActions.deleteContact.type:
+        //             return state.filter(contact => contact.id !== payload)
+
+        //         default:
+        //             return state;
+        //     }
+        // };
+
+
+        // const filter = (state = "", { type, payload }) => {
+        //     switch (type) {
+        //         case contactsActions.onHandleFilter.type:
+        //             return payload;
+
+        //         default:
+        //             return state;
+        //     }
+        // };
