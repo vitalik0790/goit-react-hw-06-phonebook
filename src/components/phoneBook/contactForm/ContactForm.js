@@ -15,6 +15,22 @@ class ContactForm extends Component {
         showEmpty: false,
     }
 
+    componentDidMount() {
+        const contacts = localStorage.getItem("contacts");
+
+        if (contacts) {
+            this.props.contactsFromLS(JSON.parse(contacts));
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        const { contacts } = this.props;
+
+        if (prevProps.contacts !== contacts) {
+            localStorage.setItem("contacts", JSON.stringify(contacts));
+        }
+    }
+
     handleChange = (e) => {
         const name = e.target.name;
         this.setState({ [name]: e.target.value })
@@ -71,7 +87,8 @@ class ContactForm extends Component {
 }
 
 const mapDispatchToProps = {
-    addContact: contactsActions.addContact
+    addContact: contactsActions.addContact,
+    contactsFromLS: contactsActions.contactsFromLS,
 }
 
 const mapStateToProps = (state) => {

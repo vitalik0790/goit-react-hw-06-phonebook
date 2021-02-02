@@ -12,6 +12,7 @@ const removeContact = (state, action) => {
 const contactList = createReducer([], {
     [contactsActions.addContact]: addContact,
     [contactsActions.deleteContact]: removeContact,
+    [contactsActions.contactsFromLS]: (_, action) => action.payload,
 })
 
 const filter = createReducer("", {

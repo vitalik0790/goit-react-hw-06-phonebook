@@ -15,10 +15,13 @@ const deleteContact = createAction("contacts/remove");
 
 const onHandleFilter = createAction("contacts/handleFilter");
 
+const contactsFromLS = createAction("contacts/contactsFromLS");
+
 export default {
     addContact,
     deleteContact,
     onHandleFilter,
+    contactsFromLS,
 }
 
 // const addContact = ({ name, number }) => ({
